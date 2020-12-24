@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API\Categories;
 use App\Http\Controllers\API\ResponseController;
 use App\Http\Resources\API\Categories\CategoryResource;
 use App\Http\Resources\API\Categories\CategoryWithProductsResource;
-use App\Models\API\Category;
+use App\Models\Category;
 
 class CategoryController extends ResponseController
 {

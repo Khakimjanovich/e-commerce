@@ -14,7 +14,7 @@ class CreateProductVariationStockView extends Migration
      */
     public function up()
     {
-        DB::statement("
+       /* DB::statement("
             CREATE VIEW product_variation_stock_view AS
                 SELECT
                     product_variations.product_id AS product_id,
@@ -41,7 +41,7 @@ class CreateProductVariationStockView extends Migration
                 GROUP BY product_variation_order.product_variation_id
             )AS product_variation_order USING(id)
             GROUP BY product_variations.id, product_variations.product_id
-        ");
+        ");*/
     }
 
     /**

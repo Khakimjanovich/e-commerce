@@ -7,7 +7,6 @@ use \Tests\TestCase;
 
 class CategoryTest extends TestCase
 {
-    protected $category;
 
     /**
      * A basic unit test example.
@@ -18,15 +17,30 @@ class CategoryTest extends TestCase
 
     public function test_it_has_many_children()
     {
-        $this->category->children()->save(
+        $cat = factory(Category::class)->create();
+        $cat->children()->save(
             factory(Category::class)->create()
         );
-        $this->assertInstanceOf(Category::class, $this->category->children->first());
+        $this->assertInstanceOf(Category::class, $cat->children->first());
     }
 
-    protected function setUp(): void
+    public function test_it_can_fetch_only_parents()
     {
-        parent::setUp();
-        $this->category = factory(Category::class)->create();
+        $cat = factory(Category::class)->create();
+        $cat->children()->save(
+            factory(Category::class)->create()
+        );
+        $this->assertEquals(1, Category::parents()->count());
+    }
+
+    public function test_it_is_orderable_by_a_numeric_order()
+    {
+        $cat = factory(Category::class)->create([
+            'order' => 1
+        ]);
+        $cat2 = factory(Category::class)->create([
+            'order' => 2
+        ]);
+        $this->assertEquals($cat->name, Category::ordered()->first()->name);
     }
 }

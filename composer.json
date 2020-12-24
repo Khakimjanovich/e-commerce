@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "moneyphp/money": "^3.3",
-        "stripe/stripe-php": "^7.28"
+        "stripe/stripe-php": "^7.28",
+        "tcg/voyager": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
