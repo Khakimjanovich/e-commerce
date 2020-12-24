@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
 use App\Models\Traits\HasPrice;
 use Illuminate\Database\Eloquent\Model;

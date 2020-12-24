@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\API\Region;
+use App\Models\Region;
 use Illuminate\Database\Seeder;
 
 class RegionsTableSeeder extends Seeder
@@ -13,11 +13,11 @@ class RegionsTableSeeder extends Seeder
     public function run()
     {
         $regions = [
-          'Namangan' => "Nam"
+            'Namangan' => "Nam"
         ];
 
-        collect($regions)->each(function ($code,$name){
-           Region::create([
+        collect($regions)->each(function ($code, $name) {
+            Region::create([
                 'code' => $code,
                 'name' => $name
             ]);

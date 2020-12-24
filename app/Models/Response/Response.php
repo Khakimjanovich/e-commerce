@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
 use App\Models\API\Response\Message;
 use Illuminate\Database\Eloquent\Model;

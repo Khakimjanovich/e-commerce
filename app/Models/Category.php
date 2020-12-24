@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
 use App\Models\Traits\HasChildren;
 use App\Models\Traits\IsOrderable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
-    use HasChildren,IsOrderable;
-    protected $guarded =[];
+    use HasChildren, IsOrderable;
+
+    protected $guarded = [];
 
     public function scopeParents(Builder $builder)
     {
@@ -22,9 +24,12 @@ class Category extends Model
         return 'slug';
     }
 
+    /**
+     * @return HasMany|Category
+     */
     public function children()
     {
-        return $this->hasMany(Category::class,'parent_id','id');
+        return $this->hasMany(Category::class, 'parent_id', 'id');
     }
 
     public function products()

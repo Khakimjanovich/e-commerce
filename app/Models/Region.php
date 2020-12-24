@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Region extends Model
 {
-    public $timestamps =false;
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'code',
     ];

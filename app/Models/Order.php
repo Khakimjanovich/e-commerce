@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\API;
+namespace App\Models;
 
 use App\Cart\Money;
 use App\User;
