@@ -9,15 +9,12 @@ use App\Models\Category;
 
 class CategoryController extends ResponseController
 {
-    public function index()
+    public function index(): object
     {
-        $message['result'] = CategoryResource::collection(
-            Category::parents()->with('children.children')->ordered()->get()
-        );
-        return $this->response($message);
+        return CategoryResource::collection(Category::parents()->with('children.children')->ordered()->get());
     }
 
-    public function show(Category $category)
+    public function show(Category $category): object
     {
         return new CategoryWithProductsResource($category);
     }

@@ -10,24 +10,21 @@ use App\Scoping\Scopes\CategoryScope;
 
 class ProductController extends ResponseController
 {
-    public function index()
+    public function index(): object
     {
-        $product = Product::with('variations.stock')->withScopes($this->scope())->paginate(10);
-        $message['result'] = ProductIndexResource::collection($product);
-        return $this->response($message);
+        return ProductIndexResource::collection(Product::with('variations.stock')->withScopes($this->scope())->paginate(10));
     }
 
-    protected function scope()
+    protected function scope(): array
     {
         return [
             'category' => new CategoryScope()
         ];
     }
 
-    public function show(Product $product)
+    public function show(Product $product): object
     {
         $product->load(['variations.type', 'variations.stock', 'variations.product']);
-        $message['result'] = new ProductResource($product);
-        return $this->response($message);
+        return new ProductResource($product);
     }
 }

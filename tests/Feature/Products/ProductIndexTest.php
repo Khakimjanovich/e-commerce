@@ -3,8 +3,6 @@
 namespace Tests\Feature\Products;
 
 use App\Models\Product;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProductIndexTest extends TestCase
@@ -14,16 +12,25 @@ class ProductIndexTest extends TestCase
      *
      * @return void
      */
-    public function test_it_returns_a_collection_of_categories()
+    public function test_it_returns_a_collection_of_posts()
     {
-        $products = factory(Product::class, 2)->create();
+        $products = factory(Product::class)->create();
 
-        $response =
-            $this->json('GET', 'api/products');
-        $products->each(function ($product) use ($response) {
-            $response->assertJsonFragment([
-                'id' => $product->id
+            $this->json('GET', 'api/products')
+            ->assertJsonFragment([
+                'id' => $products->id
             ]);
-        });
+
+    }
+    public function test_it_has_paginated_data()
+    {
+        $products = factory(Product::class,100)->create();
+
+        $this->json('GET', 'api/products')
+            ->assertJsonStructure([
+                'links',
+                'result'
+            ]);
+
     }
 }

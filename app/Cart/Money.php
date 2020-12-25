@@ -34,7 +34,7 @@ class Money
     {
 
         $formatter = new IntlMoneyFormatter(
-            new NumberFormatter('uz_UZ', NumberFormatter::CURRENCY),
+            new NumberFormatter('en', NumberFormatter::CURRENCY),
             new ISOCurrencies()
         );
 

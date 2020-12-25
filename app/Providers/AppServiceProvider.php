@@ -44,6 +44,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Stripe::setApiKey($this->stripe);
-        JsonResource::withoutWrapping();
+//        JsonResource::withoutWrapping();
     }
 }
