@@ -16,21 +16,19 @@ class ProductIndexTest extends TestCase
     {
         $products = factory(Product::class)->create();
 
-            $this->json('GET', 'api/products')
+        $this->json('GET', 'api/products')
             ->assertJsonFragment([
                 'id' => $products->id
             ]);
 
     }
+
     public function test_it_has_paginated_data()
     {
-        $products = factory(Product::class,100)->create();
-
         $this->json('GET', 'api/products')
             ->assertJsonStructure([
                 'links',
-                'result'
+                'data'
             ]);
-
     }
 }

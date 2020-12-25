@@ -3,6 +3,7 @@
 namespace Tests\Feature\Categories;
 
 use App\Models\Category;
+use App\Models\Product;
 use Tests\TestCase;
 
 class CategoryIndexTest extends TestCase
@@ -33,7 +34,7 @@ class CategoryIndexTest extends TestCase
             factory(Category::class)->create()
         );
         $this->json('GET', 'api/categories')
-            ->assertJsonCount(1, 'result');
+            ->assertJsonCount(1, 'data');
     }
 
     public function test_it_returns_categories_by_their_order()
@@ -50,6 +51,4 @@ class CategoryIndexTest extends TestCase
                 $cat->slug, $cat1->slug
             ]);
     }
-
-
 }

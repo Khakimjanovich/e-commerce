@@ -3,6 +3,7 @@
 namespace Tests\Unit\Models\Categories;
 
 use App\Models\Category;
+use App\Models\Product;
 use \Tests\TestCase;
 
 class CategoryTest extends TestCase
@@ -42,5 +43,16 @@ class CategoryTest extends TestCase
             'order' => 2
         ]);
         $this->assertEquals($cat->name, Category::ordered()->first()->name);
+    }
+
+    public function test_it_has_many_products()
+    {
+        $cat = factory(Category::class)->create();
+        if ($cat instanceof Category) {
+            $cat->products()->save(
+                factory(Product::class)->create()
+            );
+        }
+        $this->assertInstanceOf(Product::class, $cat->products->first());
     }
 }

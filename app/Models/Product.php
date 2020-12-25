@@ -6,6 +6,7 @@ use App\Models\Traits\CanBeScoped;
 use App\Models\Traits\HasPrice;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use phpseclib\Math\BigInteger;
 
@@ -52,11 +53,11 @@ class Product extends Model
     }
 
     /**
-     * @return BelongsTo
+     * @return belongsToMany
      */
-    public function categories(): BelongsTo
+    public function categories(): belongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     /**
