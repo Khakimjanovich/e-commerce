@@ -55,3 +55,8 @@ Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 //    Route::get('tables', ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
 //    Route::get('typography', ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
 //});
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

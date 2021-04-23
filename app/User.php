@@ -3,15 +3,14 @@
 namespace App;
 
 use App\Cart\Money;
-use App\Models\API\Address;
-use App\Models\API\Order;
-use App\Models\API\PaymentMethod;
-use App\Models\API\ProductVariation;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Address;
+use App\Models\Order;
+use App\Models\PaymentMethod;
+use App\Models\ProductVariation;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use Notifiable, HasApiTokens;
 
@@ -21,7 +20,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile','gateway_customer_id'
+        'name',
+        'email',
+        'password',
+        'mobile',
+        'gateway_customer_id'
     ];
 
     /**
@@ -30,7 +33,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -59,6 +63,7 @@ class User extends Authenticatable
         $this->save();
         // here we should send otp
         $sent = true;
+
         return $sent;
     }
 
@@ -67,6 +72,7 @@ class User extends Authenticatable
         if ($this->email == null) {
             return false;
         }
+
         return $this->email;
     }
 
@@ -82,8 +88,8 @@ class User extends Authenticatable
     public function cart()
     {
         return $this->belongsToMany(ProductVariation::class, 'cart_user')
-            ->withPivot('quantity')
-            ->withTimestamps();
+                    ->withPivot('quantity')
+                    ->withTimestamps();
     }
 
     public function address()
@@ -98,8 +104,8 @@ class User extends Authenticatable
 
     public function subtotal()
     {
-        $subtotal = $this->cart->sum(function ($product){
-            return $product->price->amount()*$product->pivot->quantity;
+        $subtotal = $this->cart->sum(function ($product) {
+            return $product->price->amount() * $product->pivot->quantity;
         });
 
         return new Money($subtotal);

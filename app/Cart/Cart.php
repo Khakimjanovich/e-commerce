@@ -4,7 +4,7 @@
 namespace App\Cart;
 
 
-use App\Models\API\ShippingMethod;
+use App\Models\ShippingMethod;
 use App\User;
 
 class Cart
@@ -52,7 +52,7 @@ class Cart
         ]);
     }
 
-    
+
 
     public function delete($productId)
     {
